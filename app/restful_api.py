@@ -57,15 +57,19 @@ class SetRemark(Resource):
     def get(self):
         if ('bot' in g) and ('friends' in g):
             f = Friend()
-            for i, each in enumerate(g['friends'][90:]):
+            for i, each in enumerate(g['friends'][1:]):
                 nick_name = each.nick_name
                 friend = f.query.filter_by(nick_name=nick_name).first()
-                try:
-                    print(i, nick_name, friend.remark_name)
-                    each.set_remark_name(friend.remark_name)
-                    sleep(5)
-                except:
-                    print(nick_name, 'FAIL')
+                print(i, nick_name, friend.remark_name)
+                if each.remark_name == friend.remark_name:
+                    print('PASS')
+                    continue
+                else:
+                    try:
+                        each.set_remark_name(friend.remark_name)
+                        sleep(3)
+                    except:
+                        print('FAIL')
             return {'message': 'ok.'}
 
         else:
