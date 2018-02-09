@@ -27,7 +27,7 @@ def set_remark(friend):
         else:
             try:
                 friend.set_remark_name(remark_name)
-                sleep(randint(2,5))
+                sleep(randint(3,6))
             except:
                 print('[*] FAIL')
     else:
@@ -46,9 +46,9 @@ if __name__ == '__main__':
     bot = login()
     friends = bot.friends()
     
-    for i, each in enumerate(friends[1:]):
+    for i, each in enumerate(friends[2:]):
         print(f'[{i}] {each.nick_name}')
         set_remark(each)
 
-        if i % 10 == 0:
-            sleep(randint(5,10))
+        if (i > 0) and (i % 10 == 0):
+            sleep(randint(10,20))
